@@ -10,6 +10,8 @@ public class CuteBoy : MonoBehaviour
     [SerializeField] GameObject angryFace;
     [SerializeField] GameObject neutralFace;
     [SerializeField] GameObject happyFace;
+    [SerializeField] GameObject fearFace;
+    [SerializeField] GameObject blushFace;
     [SerializeField] GameObject staticLiquid;
     [SerializeField] GameObject flowLiquid;
 
@@ -47,7 +49,9 @@ public class CuteBoy : MonoBehaviour
     {
         NEUTRAL,
         HAPPY,
-        ANGER
+        ANGER,
+        FEAR,
+        BLUSH
     }
 
     private void Start()
@@ -126,6 +130,8 @@ public class CuteBoy : MonoBehaviour
                     angryFace.SetActive(false);
                     happyFace.SetActive(false);
                     neutralFace.SetActive(true);
+                    fearFace.SetActive(false);
+                    blushFace.SetActive(false);
                     staticLiquid.SetActive(true);
                     animator.SetTrigger("neutral");
                     isAngry = false;
@@ -135,6 +141,8 @@ public class CuteBoy : MonoBehaviour
                     angryFace.SetActive(false);
                     happyFace.SetActive(true);
                     neutralFace.SetActive(false);
+                    fearFace.SetActive(false);
+                    blushFace.SetActive(false);
                     staticLiquid.SetActive(true);
                     animator.SetTrigger("happy");
                     isAngry = false;
@@ -144,9 +152,33 @@ public class CuteBoy : MonoBehaviour
                     angryFace.SetActive(true);
                     happyFace.SetActive(false);
                     neutralFace.SetActive(false);
+                    fearFace.SetActive(false);
+                    blushFace.SetActive(false);
                     staticLiquid.SetActive(false);
                     animator.SetTrigger("angry");
                     isAngry = true;
+                    break;
+                case States.BLUSH:
+                    Debug.Log("is blushing");
+                    angryFace.SetActive(false);
+                    happyFace.SetActive(false);
+                    neutralFace.SetActive(false);
+                    fearFace.SetActive(false);
+                    blushFace.SetActive(true);
+                    staticLiquid.SetActive(true);
+                    animator.SetTrigger("blush");
+                    isAngry = false;
+                    break;
+                case States.FEAR:
+                    Debug.Log("is happy");
+                    angryFace.SetActive(false);
+                    happyFace.SetActive(false);
+                    neutralFace.SetActive(false);
+                    fearFace.SetActive(true);
+                    blushFace.SetActive(false);
+                    staticLiquid.SetActive(false);
+                    animator.SetTrigger("fear");
+                    isAngry = false;
                     break;
             }
         }
@@ -163,6 +195,14 @@ public class CuteBoy : MonoBehaviour
     public void GettingNeutral()
     {
         SetCurrentState(States.NEUTRAL);
+    }
+    public void GettingBlush()
+    {
+        SetCurrentState(States.BLUSH);
+    }
+    public void GettingFear()
+    {
+        SetCurrentState(States.FEAR);
     }
     public void Menu()
     {
